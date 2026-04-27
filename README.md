@@ -1,5 +1,5 @@
 # Differential-Robot-Control-RPP-PID
-This project simulates a three-wheeled differential drive robot performing trajectory tracking using the **RPP (Relative Pure Pursuit) Law** for path following and **auto-tuning PID controllers** for motor speed regulation. 
+This project simulates a three-wheeled differential drive robot performing trajectory tracking using the **RPP (Regulated Pure Pursuit) Law** for path following and **auto-tuning PID controllers** for motor speed regulation. 
 
 ## Project Overview
 The simulation focuses on a differential drive system where the motors are identified using system identification techniques to obtain the transfer functions for both left and right wheels.
@@ -27,7 +27,11 @@ The simulation provides the following output plots:
 * **Cross-track Error:** Deviation from the planned trajectory.
 * **Heading Angle:** Orientation of the robot over time.
 * **Velocity Profiles:** Both Linear and Angular velocities.
-
+* 
+## References
+This project implements the Regulated Pure Pursuit algorithm as described in:
+* **S. Macenski, S. Singh, F. Martin, J. Gines, "Regulated Pure Pursuit for Robot Path Tracking," *Autonomous Robots*, 2023.**
+* 
 ## Technologies Used
 * MATLAB & Simulink
 * System Identification Toolbox
