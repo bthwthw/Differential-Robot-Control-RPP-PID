@@ -27,11 +27,11 @@ The simulation provides the following output plots:
 * **Cross-track Error:** Deviation from the planned trajectory.
 * **Heading Angle:** Orientation of the robot over time.
 * **Velocity Profiles:** Both Linear and Angular velocities.
-* 
+
 ## References
 This project implements the Regulated Pure Pursuit algorithm as described in:
 * **S. Macenski, S. Singh, F. Martin, J. Gines, "Regulated Pure Pursuit for Robot Path Tracking," *Autonomous Robots*, 2023.**
-* 
+
 ## Technologies Used
 * MATLAB & Simulink
 * System Identification Toolbox
