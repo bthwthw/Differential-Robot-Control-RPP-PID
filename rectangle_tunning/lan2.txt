@@ -1,0 +1,26 @@
+
+V_max = 1.0;          % Vận tốc chạy thẳng tối đa (m/s)
+lookahead_gain = 0.5; % Hệ số dự phóng (thời gian ngắm trước)
+L_min = 0.3;          % Khoảng cách ngắm tối thiểu an toàn (m)
+L_max = 0.3;          % Khoảng cách ngắm tối đa (m)
+r_min = 0.5;          % Bán kính cua tối thiểu của robot vi sai (m)
+
+==================================================
+       BẢNG KẾT QUẢ ĐÁNH GIÁ CHẤT LƯỢNG RPP       
+==================================================
+[1] ĐỘ CHÍNH XÁC BÁM QUỸ ĐẠO (TRACKING ACCURACY)
+    - Max CTE (Sai số lớn nhất)  : 0.2242 (m)
+    - MAE (Sai số trung bình)    : 0.0122 (m)
+    - RMSE (Sai số toàn phương)  : 0.0370 (m)
+    - Độ lệch chuẩn sai số (Std) : 0.0367 (m)
+--------------------------------------------------
+[2] ĐỘ ÊM ÁI VÀ NĂNG LƯỢNG (CONTROL EFFORT)
+    - Năng lượng tịnh tiến (RMS v): 0.9630 (m/s)
+    - Năng lượng xoay (RMS w)     : 0.7163 (rad/s)
+    - Độ giật tịnh tiến trung bình: 0.4735 (m/s^2)
+    - Độ giật góc trung bình      : 1.2499 (rad/s^2)
+--------------------------------------------------
+[3] ĐỘNG HỌC TỔNG THỂ (GLOBAL KINEMATICS)
+    - Tổng quãng đường đã đi      : 19.6115 (m)
+    - Thời gian hoàn thành        : 20.70 (s)
+==================================================

@@ -6,15 +6,12 @@ figure;
 
 % (a) Quỹ đạo di chuyển (Robot's trajectory)
 subplot(2, 2, 1);
-plot(WP(1,1), WP(1,2), "bo", 'MarkerFaceColor', 'b'); hold on;
-plot(WP(2,1), WP(2,2), "bo", 'MarkerFaceColor', 'b'); hold on;
-plot(WP(3,1), WP(3,2), "bo", 'MarkerFaceColor', 'b'); hold on;
-plot(WP(4,1), WP(4,2), "bo", 'MarkerFaceColor', 'b'); hold on;
-plot(simout.position_x, simout.position_y, "Red", 'LineWidth', 1.5); 
+plot(WP(:,1), WP(:,2), 'r--', 'LineWidth', 1); hold on;
+plot(simout.position_x, simout.position_y, "b", 'LineWidth', 1.5); 
 xlabel('x (m)'); 
 ylabel('y (m)');
 title("(a) Robot's Trajectory");
-legend('WP 1', 'WP 2', 'WP 3', 'WP 4', "Robot's Trajectory", 'Location', 'best');
+legend('WP', "Robot's Trajectory", 'Location', 'best');
 grid on;
 axis equal;
 
