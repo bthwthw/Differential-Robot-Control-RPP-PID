@@ -1,0 +1,5 @@
+V_max = 1.0;          % Vận tốc chạy thẳng tối đa (m/s)
+lookahead_gain = 0.2; % Hệ số dự phóng (thời gian ngắm trước)
+L_min = 0.3;          % Khoảng cách ngắm tối thiểu an toàn (m)
+L_max = 1.2;          % Khoảng cách ngắm tối đa (m)
+r_min = 0.8;          % Bán kính cua tối thiểu của robot vi sai (m)

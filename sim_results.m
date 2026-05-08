@@ -3,10 +3,16 @@ simout = sim('RPP.slx');
 
 %% Results 
 figure;
-
 % (a) Quỹ đạo di chuyển (Robot's trajectory)
-subplot(2, 2, 1);
-plot(WP(:,1), WP(:,2), 'r--', 'LineWidth', 1); hold on;
+bg_image = imread('layout.png');
+% real dimension 
+X_max = 28.8; % m
+Y_max = 22.4; % m
+imshow(bg_image, 'XData', [0, X_max], 'YData', [Y_max, 0]);
+axis on; 
+set(gca, 'YDir', 'normal'); 
+hold on;
+plot(WP(:,1), WP(:,2), 'r--', 'LineWidth', 2.0); hold on;
 plot(simout.position_x, simout.position_y, "b", 'LineWidth', 1.5); 
 xlabel('x (m)'); 
 ylabel('y (m)');
@@ -14,34 +20,39 @@ title("(a) Robot's Trajectory");
 legend('WP', "Robot's Trajectory", 'Location', 'best');
 grid on;
 axis equal;
+xlim([0 X_max]);
+ylim([0 Y_max]);
 
+figure;
 % (c) Sai số bám quỹ đạo (Cross-track error)
-subplot(2, 2, 2);
+subplot(3, 1, 1);
 n_ct = min(length(simout.tout), length(simout.cross_track)); % Đồng bộ kích thước
 plot(simout.tout(1:n_ct), simout.cross_track(1:n_ct), "Blue", 'LineWidth', 1); 
 xlabel('Time (s)'); 
 ylabel('Cross\_track (m)'); 
 title('(b) Cross-track error');
 grid on;
+axis tight;
 
 % (d) Vận tốc dài (Linear velocity)
-subplot(2, 2, 3);
+subplot(3, 1, 2);
 n_v = min(length(simout.tout), length(simout.v)); % Đồng bộ kích thước
 plot(simout.tout(1:n_v), simout.v(1:n_v), "Blue", 'LineWidth', 1); 
 xlabel('Time (s)');
 ylabel('v (m/s)'); 
-title('(d) Linear velocity');
+title('(c) Linear velocity');
 grid on;
+axis tight;
 
 % (e) Vận tốc góc (Angular velocity)
-subplot(2, 2, 4);
+subplot(3, 1, 3);
 n_w = min(length(simout.tout), length(simout.w)); % Đồng bộ kích thước
 plot(simout.tout(1:n_w), simout.w(1:n_w), "Blue", 'LineWidth', 1); 
 xlabel('Time (s)');
 ylabel('w (rad/s)'); 
-title('(e) Angular velocity');
+title('(d) Angular velocity');
 grid on;
-
+axis tight;
 %% --- TỰ ĐỘNG TÍNH TOÁN CÁC CHỈ SỐ ĐÁNH GIÁ  ---
 
 e = simout.cross_track;

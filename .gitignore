@@ -1,8 +1,6 @@
-# MATLAB rác
 *.asv
 *.slprj/
 *.mex*
 *.log
-# OneDrive rác (nếu lỡ dính)
 .DS_Store
 Desktop.ini

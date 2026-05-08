@@ -2,26 +2,34 @@ clear;
 clc;
 close all;
 %% Waypoint
-% % Rectangle 
-% WP =[0 0;
-%      6 0;
-%      6 4;
-%      0 4;
-%      0 0];
+map_name = 'binary_layout.png';
+resolution = 40; % 40 cells/m, 0.025m/pixel
+robot_radius = 0.35;
+safety_margin = 0.25;
 
+% inflation radius 
+inf_rad = robot_radius + safety_margin;
 
-WP =[0 0;
-     5 0;
-     5 10];
+% img processing 
+bw_image = imread(map_name);
+if size(bw_image, 3) == 3
+    bw_image = rgb2gray(bw_image); 
+end
+bw_image = imbinarize(bw_image);
+
+%  occupancy Map (NOT img: ~bw_image cause 1 is obstacle)
+map = binaryOccupancyMap(~bw_image, resolution);
+% inflation map for A* 
+map_inf = copy(map);
+inflate(map_inf, inf_rad);
 
 %% Robot
 R = 0.173;        % Wheels' radius
 L = 0.411;        % distance between 2 wheels
 d = 0.116;       % distance of gravity center to midpoint of 2 wheels
 
-x_0 = 0;      % initial X, Y, theta of robot 
-y_0 = 0;       
-theta_0 = 0;
+start_pose = [9.95, 7.65];    
+goal_pose  = [25.15, 15.3];
 
 %% Motor
 load('motor_data.mat');
@@ -33,3 +41,4 @@ g = 9.81;
 %% Robustness
 m_add = 0;      %kg
 time_add = 0;
+disp('Init done')
