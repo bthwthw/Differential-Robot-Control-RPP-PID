@@ -2,6 +2,23 @@ clear;
 clc;
 close all;
 
+%% RPP parameters 
+desired_linear_vel = 1.0;
+max_linear_accel = 1.5;
+max_linear_decel = 1.5;
+
+min_lookahead_dist = 0.35;
+max_lookahead_dist = 0.9;
+lookahead_time = 0.55;
+
+rotate_to_heading_angular_vel = 3.0;
+
+regulated_linear_scaling_min_radius = 0.9;
+regulated_linear_scaling_min_speed = 0.2;
+
+max_angular_accel = 4.0;
+goal_dist_tol = 0.05;
+
 %% Occupancy for A* 
 load('binaryOccupancy.mat');
 
@@ -20,18 +37,22 @@ load('binaryOccupancy.mat');
 % 
 % %  occupancy Map (NOT img: ~bw_image cause 1 is obstacle)
 % map = binaryOccupancyMap(~bw_image, resolution);
+
 % % inflation map for A* 
 % map_inf = copy(map);
 % inflate(map_inf, inf_rad);
+
 % inflated_matrix = occupancyMatrix(map_inf);
 % image_to_save = ~inflated_matrix;
 % imwrite(image_to_save, 'layout_inf.png');
+% save('binaryOccupancy.mat', 'map', 'map_inf');
 
 %% Robot
 R = 0.173;        % Wheels' radius
 L = 0.411;        % distance between 2 wheels
 d = 0.116;       % distance of gravity center to midpoint of 2 wheels
 
+% m 
 start_pose = [9.95, 7.65];    
 goal_pose  = [25.15, 15.3];
 

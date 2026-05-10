@@ -2,10 +2,29 @@
 simout = sim('RPP.slx');
 
 %% Results 
-figure;
-% Quỹ đạo di chuyển (Robot's trajectory)
+fig1 = figure('Visible', 'off');
+% các wp A* sinh ra 
+bg_image = imread('layout_inf.png');
+% kích thước layout thật 
+X_max = 28.8; % m
+Y_max = 22.4; % m
+imshow(bg_image, 'XData', [0, X_max], 'YData', [Y_max, 0]);
+axis on; 
+set(gca, 'YDir', 'normal'); 
+hold on;
+plot(WP(:,1), WP(:,2), 'r--', 'LineWidth', 2.0); hold on;
+xlabel('x (m)'); 
+ylabel('y (m)');
+legend('WP', 'Location', 'best');
+grid on;
+axis equal;
+xlim([0 X_max]);
+ylim([0 Y_max]);
+
+fig2 = figure('Visible', 'off');
+% Quỹ đạo di chuyển
 bg_image = imread('layout.png');
-% real dimension 
+% kích thước layout thật 
 X_max = 28.8; % m
 Y_max = 22.4; % m
 imshow(bg_image, 'XData', [0, X_max], 'YData', [Y_max, 0]);
@@ -23,53 +42,40 @@ axis equal;
 xlim([0 X_max]);
 ylim([0 Y_max]);
 
-figure;
-% Quỹ đạo di chuyển (Robot's trajectory)
-bg_image = imread('layout_inf.png');
-% real dimension 
-X_max = 28.8; % m
-Y_max = 22.4; % m
-imshow(bg_image, 'XData', [0, X_max], 'YData', [Y_max, 0]);
-axis on; 
-set(gca, 'YDir', 'normal'); 
-hold on;
-plot(WP(:,1), WP(:,2), 'r--', 'LineWidth', 2.0); hold on;
-xlabel('x (m)'); 
-ylabel('y (m)');
-legend('WP', 'Location', 'best');
-grid on;
-axis equal;
-xlim([0 X_max]);
-ylim([0 Y_max]);
+fig1.Visible = 'on';
+fig2.Visible = 'on';
 
 figure;
-% (a) Sai số bám quỹ đạo (Cross-track error)
+% (a) Sai số bám quỹ đạo 
 subplot(3, 1, 1);
-n_ct = min(length(simout.tout), length(simout.cross_track)); % Đồng bộ kích thước
+n_ct = min(length(simout.tout), length(simout.cross_track));
 plot(simout.tout(1:n_ct), simout.cross_track(1:n_ct), "Blue", 'LineWidth', 1); 
-xlabel('Time (s)'); 
-ylabel('Cross\_track (m)'); 
-title('(a) Cross-track error');
+set(gca, 'FontSize', 10);
+xlabel('Thời gian (s)', 'FontSize', 12); 
+ylabel('Sai số (m)', 'FontSize', 12); 
+title('(a) Sai số bám quỹ đạo ', 'FontSize', 14);
 grid on;
 axis tight;
 
-% (b) Vận tốc dài (Linear velocity)
+% (b) Vận tốc tịnh tiến 
 subplot(3, 1, 2);
-n_v = min(length(simout.tout), length(simout.v)); % Đồng bộ kích thước
+n_v = min(length(simout.tout), length(simout.v));
 plot(simout.tout(1:n_v), simout.v(1:n_v), "Blue", 'LineWidth', 1); 
-xlabel('Time (s)');
-ylabel('v (m/s)'); 
-title('(b) Linear velocity');
+set(gca, 'FontSize', 10);
+xlabel('Thời gian (s)', 'FontSize', 12);
+ylabel('v (m/s)', 'FontSize', 12); 
+title('(b) Vận tốc tịnh tiến', 'FontSize', 14);
 grid on;
 axis tight;
 
-% (c) Vận tốc góc (Angular velocity)
+% (c) Vận tốc góc 
 subplot(3, 1, 3);
-n_w = min(length(simout.tout), length(simout.w)); % Đồng bộ kích thước
+n_w = min(length(simout.tout), length(simout.w)); 
 plot(simout.tout(1:n_w), simout.w(1:n_w), "Blue", 'LineWidth', 1); 
-xlabel('Time (s)');
-ylabel('w (rad/s)'); 
-title('(c) Angular velocity');
+set(gca, 'FontSize', 10);
+xlabel('Thời gian (s)', 'FontSize', 12);
+ylabel('w (rad/s)', 'FontSize', 12); 
+title('(c) Vận tốc góc', 'FontSize', 14);
 grid on;
 axis tight;
 
@@ -118,26 +124,23 @@ Total_Distance = sum(sqrt(dx.^2 + dy.^2));
 Total_Time = t(end);
 
 %% --- IN BÁO CÁO RA MÀN HÌNH ---
-fprintf('\n==================================================\n');
-fprintf('       BẢNG KẾT QUẢ ĐÁNH GIÁ CHẤT LƯỢNG RPP       \n');
-fprintf('==================================================\n');
-fprintf(' ĐỘ CHÍNH XÁC BÁM QUỸ ĐẠO (TRACKING ACCURACY)\n');
-fprintf('    - Max CTE (Sai số lớn nhất)  : %.4f (m)\n', Max_CTE);
-fprintf('    - MAE (Sai số trung bình)    : %.4f (m)\n', MAE_CTE);
+fprintf(' ĐỘ CHÍNH XÁC BÁM QUỸ ĐẠO \n');
+fprintf('    - Max                        : %.4f (m)\n', Max_CTE);
+fprintf('    - Mean                       : %.4f (m)\n', MAE_CTE);
 fprintf('    - RMSE (Sai số toàn phương)  : %.4f (m)\n', RMSE_CTE);
-fprintf('    - Độ lệch chuẩn sai số (Std) : %.4f (m)\n', Std_CTE);
+fprintf('    - Độ lệch chuẩn sai số       : %.4f (m)\n', Std_CTE);
 fprintf('--------------------------------------------------\n');
-fprintf(' ĐỘ ÊM ÁI VÀ NĂNG LƯỢNG (CONTROL EFFORT)\n');
+fprintf(' ĐỘ ÊM ÁI VÀ NĂNG LƯỢNG \n');
 fprintf('    - Năng lượng tịnh tiến (RMS v): %.4f (m/s)\n', RMS_v);
 fprintf('    - Năng lượng xoay (RMS w)     : %.4f (rad/s)\n', RMS_w);
 fprintf('    - Độ giật tịnh tiến trung bình: %.4f (m/s^2)\n', Mean_Linear_Jerk);
 fprintf('    - Độ giật góc trung bình      : %.4f (rad/s^2)\n', Mean_Angular_Jerk);
 fprintf('--------------------------------------------------\n');
-fprintf(' ĐỘNG HỌC TỔNG THỂ (GLOBAL KINEMATICS)\n');
-fprintf('    - Tổng quãng đường đã đi      : %.4f (m)\n', Total_Distance);
+fprintf(' ĐỘNG HỌC TỔNG THỂ \n');
+fprintf('    - Tổng quãng đường đã đi      : %.4f (m)\n', Total_Distance);    
 fprintf('    - Thời gian hoàn thành        : %.2f (s)\n', Total_Time);
 fprintf('--------------------------------------------------\n');
-fprintf(' VẬN TỐC (VELOCITY)\n');
+fprintf(' VẬN TỐC \n');
 fprintf('    - Vận tốc dài trung bình      : %.4f (m/s)\n', mean_v);
 fprintf('    - Vận tốc dài lớn nhất        : %.4f (m/s)\n', max_v);
 fprintf('    - Vận tốc góc trung bình      : %.4f (rad/s)\n', mean_w);
