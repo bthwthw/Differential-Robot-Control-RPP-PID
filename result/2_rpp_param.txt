@@ -1,0 +1,45 @@
+
+
+start_pose = [9.95, 7.65];    
+goal_pose  = [25.15, 15.3];
+
+
+desired_linear_vel = 1.0;
+max_linear_accel = 1.5;
+max_linear_decel = 1.5;
+
+min_lookahead_dist = 0.3;
+max_lookahead_dist = 0.9;
+lookahead_time = 0.5;
+
+rotate_to_heading_angular_vel = 3.0;
+
+regulated_linear_scaling_min_radius = 0.9;
+regulated_linear_scaling_min_speed = 0.2;
+
+max_angular_accel = 4.0;
+goal_dist_tol = 0.05;
+
+
+ ĐỘ CHÍNH XÁC BÁM QUỸ ĐẠO 
+    - Max                        : 0.3151 (m)
+    - Mean                       : 0.0248 (m)
+    - RMSE (Sai số toàn phương)  : 0.0574 (m)
+    - Độ lệch chuẩn sai số       : 0.0574 (m)
+--------------------------------------------------
+ ĐỘ ÊM ÁI VÀ NĂNG LƯỢNG 
+    - Năng lượng tịnh tiến (RMS v): 0.9723 (m/s)
+    - Năng lượng xoay (RMS w)     : 0.3892 (rad/s)
+    - Độ giật tịnh tiến trung bình: 0.2133 (m/s^2)
+    - Độ giật góc trung bình      : 0.7312 (rad/s^2)
+--------------------------------------------------
+ ĐỘNG HỌC TỔNG THỂ 
+    - Tổng quãng đường đã đi      : 21.4144 (m)
+    - Thời gian hoàn thành        : 22.20 (s)
+--------------------------------------------------
+ VẬN TỐC 
+    - Vận tốc dài trung bình      : 0.9647 (m/s)
+    - Vận tốc dài lớn nhất        : 1.0387 (m/s)
+    - Vận tốc góc trung bình      : 0.1890 (rad/s)
+    - Vận tốc góc lớn nhất        : 1.2057 (rad/s)
+==================================================

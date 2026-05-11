@@ -7,9 +7,9 @@ desired_linear_vel = 1.0;
 max_linear_accel = 1.5;
 max_linear_decel = 1.5;
 
-min_lookahead_dist = 0.35;
+min_lookahead_dist = 0.3;
 max_lookahead_dist = 0.9;
-lookahead_time = 0.55;
+lookahead_time = 0.5;
 
 rotate_to_heading_angular_vel = 3.0;
 
@@ -46,6 +46,15 @@ load('binaryOccupancy.mat');
 % image_to_save = ~inflated_matrix;
 % imwrite(image_to_save, 'layout_inf.png');
 % save('binaryOccupancy.mat', 'map', 'map_inf');
+% 
+% figure;
+% % Dùng hàm show tích hợp sẵn của binaryOccupancyMap để vẽ bản đồ
+% show(map);
+% grid on;
+% grid minor; % Bật thêm lưới nhỏ cho chi tiết 
+% xlabel('Trục X (m)');
+% ylabel('Trục Y (m)');
+% exportgraphics(gcf, 'layout_grid.png', 'Resolution', 300);
 
 %% Robot
 R = 0.173;        % Wheels' radius
