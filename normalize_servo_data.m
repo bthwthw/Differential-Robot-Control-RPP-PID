@@ -1,4 +1,4 @@
-data = readtable('divaovadira.csv', 'VariableNamingRule', 'preserve');
+data = readtable('velocity_20260502_063609.csv', 'VariableNamingRule', 'preserve');
 
 % 2. Lấy trục thời gian gốc và các tín hiệu
 t_raw = data.("Time(s)");
