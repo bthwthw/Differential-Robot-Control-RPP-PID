@@ -1,5 +1,5 @@
 *.asv
-*.slprj/
+slprj/
 *.mex*
 *.log
 .DS_Store

@@ -1,4 +1,4 @@
-bg_image = imread('layout_binary.png');
+bg_image = imread('layout.png');
 X_max = 28.8;
 Y_max = 22.4;
 
