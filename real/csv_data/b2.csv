@@ -1,4 +1,4 @@
-time_s,amcl_x,amcl_y,left_velocity_cmd,right_velocity_cmd,real_left_velocity,real_right_velocity,voltage
+time_s,amcl_x,amcl_y,left_velocity_cmd,right_velocity_cmd,left_velocity_real,right_velocity_real,voltage
 0.0,,,0.0000,-0.0000,0.0000,0.0000,50.8978
 0.5,,,0.0000,-0.0000,0.0000,0.0000,50.8366
 1.0,,,0.0000,-0.0000,0.0000,0.0000,50.8519

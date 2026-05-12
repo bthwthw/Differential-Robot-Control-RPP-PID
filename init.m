@@ -56,14 +56,14 @@ load('binaryOccupancy.mat');
 % ylabel('Trục Y (m)');
 % exportgraphics(gcf, 'layout_grid.png', 'Resolution', 300);
 
-%% Robot
+%% Robot parameters
 R = 0.0865;        % Wheels' radius
 L = 0.411;        % distance between 2 wheels
 d = 0.116;       % distance of gravity center to midpoint of 2 wheels
 
 % m 
-start_pose = [25.1569, 19.1814];    
-goal_pose  = [9.9142, 5.7391];
+start_pose = [9.8542, 7.4193];    
+goal_pose  = [25.2169, 15.8208];
 
 %% Motor
 load('motor_data.mat');

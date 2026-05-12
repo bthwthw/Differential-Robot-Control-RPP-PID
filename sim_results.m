@@ -53,6 +53,23 @@ ylim([0 Y_max]);
 fig1.Visible = 'on';
 fig2.Visible = 'on';
 
+%% --- TÍNH TOÁN SỚM CÁC CHỈ SỐ ĐÁNH GIÁ ---
+e = simout.cross_track;
+v = simout.v;
+w = simout.w;
+x = simout.position_x;
+y = simout.position_y;
+t = simout.tout; % Trục thời gian
+
+% Lọc nhiễu NaN
+e(isnan(e)) = 0; v(isnan(v)) = 0; w(isnan(w)) = 0; x(isnan(x)) = 0; y(isnan(y)) = 0;
+
+% Tính toán các chỉ số
+Max_CTE = max(abs(e));
+MAE_CTE = mean(abs(e));
+RMSE_CTE = sqrt(mean(e.^2));
+Std_CTE = std(e);
+
 figure;
 % (a) Sai số bám quỹ đạo 
 subplot(3, 1, 1);
@@ -64,6 +81,10 @@ ylabel('Sai số (m)', 'FontSize', 12);
 title('(a) Sai số bám quỹ đạo ', 'FontSize', 14);
 grid on;
 axis tight;
+hold on;
+text(0.65, 0.9, sprintf('- Max: %.4f (m)\n- Mean: %.4f (m)', Max_CTE, MAE_CTE), ...
+    'Units', 'normalized', 'VerticalAlignment', 'top', 'HorizontalAlignment', 'left', ...
+    'FontSize', 10, 'BackgroundColor', 'white', 'EdgeColor', 'black', 'Margin', 3);
 
 % (b) Vận tốc tịnh tiến 
 subplot(3, 1, 2);
@@ -87,42 +108,13 @@ title('(c) Vận tốc góc', 'FontSize', 14);
 grid on;
 axis tight;
 
-%% --- TỰ ĐỘNG TÍNH TOÁN CÁC CHỈ SỐ ĐÁNH GIÁ  ---
-
-e = simout.cross_track;
-v = simout.v;
-w = simout.w;
-x = simout.position_x;
-y = simout.position_y;
-t = simout.tout; % Trục thời gian
+%% --- HOÀN TẤT TÍNH TOÁN CÁC CHỈ SỐ ---
 dt = t(2) - t(1); % Thời gian lấy mẫu (0.05s)
-
 max_v = max(abs(v));
 mean_v = mean(abs(v));
-
 max_w = max(abs(w));
 mean_w = mean(abs(w));
 
-% Lọc nhiễu NaN nếu có lúc khởi động
-e(isnan(e)) = 0; v(isnan(v)) = 0; w(isnan(w)) = 0; x(isnan(x)) = 0; y(isnan(y)) = 0;
-% --- NHÓM 1: TRACKING ACCURACY ---
-Max_CTE = max(abs(e));
-MAE_CTE = mean(abs(e));
-RMSE_CTE = sqrt(mean(e.^2));
-Std_CTE = std(e);
-
-% --- NHÓM 2: CONTROL EFFORT & SMOOTHNESS ---
-% Năng lượng điều khiển (RMS của vận tốc)
-RMS_v = sqrt(mean(v.^2));
-RMS_w = sqrt(mean(w.^2));
-
-% Độ giật (Gia tốc trung bình) - Tính đạo hàm bậc 1
-dv_dt = diff(v) / dt;
-dw_dt = diff(w) / dt;
-Mean_Linear_Jerk = mean(abs(dv_dt));
-Mean_Angular_Jerk = mean(abs(dw_dt));
-
-% --- NHÓM 3: GLOBAL KINEMATICS ---
 % Quãng đường thực tế
 dx = diff(x);
 dy = diff(y);
@@ -137,12 +129,6 @@ fprintf('    - Max                        : %.4f (m)\n', Max_CTE);
 fprintf('    - Mean                       : %.4f (m)\n', MAE_CTE);
 fprintf('    - RMSE (Sai số toàn phương)  : %.4f (m)\n', RMSE_CTE);
 fprintf('    - Độ lệch chuẩn sai số       : %.4f (m)\n', Std_CTE);
-fprintf('--------------------------------------------------\n');
-fprintf(' ĐỘ ÊM ÁI VÀ NĂNG LƯỢNG \n');
-fprintf('    - Năng lượng tịnh tiến (RMS v): %.4f (m/s)\n', RMS_v);
-fprintf('    - Năng lượng xoay (RMS w)     : %.4f (rad/s)\n', RMS_w);
-fprintf('    - Độ giật tịnh tiến trung bình: %.4f (m/s^2)\n', Mean_Linear_Jerk);
-fprintf('    - Độ giật góc trung bình      : %.4f (rad/s^2)\n', Mean_Angular_Jerk);
 fprintf('--------------------------------------------------\n');
 fprintf(' ĐỘNG HỌC TỔNG THỂ \n');
 fprintf('    - Tổng quãng đường đã đi      : %.4f (m)\n', Total_Distance);    

@@ -1,4 +1,4 @@
-time_s,amcl_x,amcl_y,left_velocity_cmd,right_velocity_cmd,real_left_velocity,real_right_velocity,voltage
+time_s,amcl_x,amcl_y,left_velocity_cmd,right_velocity_cmd,left_velocity_encoder,right_velocity_encoder,voltage
 60.5,0.0175,0.0008,0.0822,-0.1806,0.0000,-0.1755,50.9744
 61.0,0.0369,0.0043,0.1054,-0.1975,0.0000,-0.1755,50.9438
 61.5,0.0612,0.0113,0.1062,-0.1741,-0.0076,-0.1373,50.9284
