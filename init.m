@@ -57,13 +57,13 @@ load('binaryOccupancy.mat');
 % exportgraphics(gcf, 'layout_grid.png', 'Resolution', 300);
 
 %% Robot
-R = 0.173;        % Wheels' radius
+R = 0.0865;        % Wheels' radius
 L = 0.411;        % distance between 2 wheels
 d = 0.116;       % distance of gravity center to midpoint of 2 wheels
 
 % m 
-start_pose = [9.95, 7.65];    
-goal_pose  = [25.15, 15.3];
+start_pose = [25.1569, 19.1814];    
+goal_pose  = [9.9142, 5.7391];
 
 %% Motor
 load('motor_data.mat');
@@ -75,4 +75,7 @@ g = 9.81;
 %% Robustness
 m_add = 0;      %kg
 time_add = 0;
-disp('Init done')
+disp('Init done');
+
+run_A_Star();
+sim_results();

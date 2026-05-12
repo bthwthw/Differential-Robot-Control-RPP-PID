@@ -1,10 +1,14 @@
 %% Simulation 
 simout = sim('RPP.slx');
 
+% Lấy dữ liệu từ kết quả mô phỏng
+x = simout.position_x; % Tọa độ x
+y = simout.position_y; % Tọa độ y
+
 %% Results 
 fig1 = figure('Visible', 'off');
 % các wp A* sinh ra 
-bg_image = imread('layout_inf.png');
+bg_image = imread('resources/layout_inf.png');
 % kích thước layout thật 
 X_max = 28.8; % m
 Y_max = 22.4; % m
@@ -25,7 +29,7 @@ ylim([0 Y_max]);
 
 fig2 = figure('Visible', 'off');
 % Quỹ đạo di chuyển
-bg_image = imread('layout.png');
+bg_image = imread('resources/layout.png');
 % kích thước layout thật 
 X_max = 28.8; % m
 Y_max = 22.4; % m
